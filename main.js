@@ -1,8 +1,8 @@
 const form = document.querySelector(".form");
 const alert = document.querySelector(".alert");
-const listInput = document.getElementById("list-input");
-const priceInput = document.getElementById("price-input");
-const qtyInput = document.getElementById("qty-input");
+const titleInput = document.getElementById("title-input");
+const authorInput = document.getElementById("author-input");
+const isbnInput = document.getElementById("isbn-input");
 const entry = document.querySelectorAll(".item")
 
 
@@ -12,18 +12,16 @@ const list = document.querySelector(".list");
 const clearBtn = document.querySelector(".clear-btn");
 
 let editElement;
-let editPrice;
-let editQty;
-let editTotal;
+let editAuthor;
+let editISBN;
 let editFlag = false;
 let editID = "";
 
 const addItem = (e) => {
     e.preventDefault();
-	const value = listInput.value;
-    const price = priceInput.value;
-    const qty = qtyInput.value;
-    const total = (((price * 100) * qty) / 100).toFixed(2);
+	const value = titleInput.value;
+    const author = authorInput.value;
+    const isbn = isbnInput.value;
 	const id = new Date().getTime().toString();
 
 	if (value !== "" && !editFlag) {
@@ -33,9 +31,8 @@ const addItem = (e) => {
 		element.setAttributeNode(attr);
 		element.classList.add("list-item");
 		element.innerHTML = `<p class="title item">${value}</p>
-            <p class="price">${price}</p>
-            <p class="qty">${qty}</p>
-            <p class="total">${total}</p>
+            <p class="author">${author}</p>
+            <p class="isbn">${isbn}</p>
             <div class="btn-container">
               <button type="button" class="edit-btn">
                 <i class="fas fa-edit"></i>
@@ -53,16 +50,15 @@ const addItem = (e) => {
 		list.appendChild(element);
 		displayAlert("item added", "success");
 		container.classList.add("show-container");
-		addToLocalStorage(id, value, price, qty, total);
+		addToLocalStorage(id, value, author, isbn);
 		setBackToDefault();
 	} else if (value !== "" && editFlag) {
 		editElement.innerHTML = value;
-        editPrice.innerHTML = price;
-        editQty.innerHTML = qty;
-        editTotal.innerHTML = total;
+        editAuthor.innerHTML = author;
+        editISBN.innerHTML = isbn;
 		displayAlert("item altered", "success");
 
-		editLocalStorage(editID, value, price, qty, total);
+		editLocalStorage(editID, value, author, isbn);
 		setBackToDefault();
 	} else {
 		displayAlert("please input item", "danger");
@@ -108,35 +104,32 @@ const deleteItem = (e) => {
 };
 
 
-// how to add price, qty, and total to editItem???
 
 const editItem = (e) => {
 	const element = e.currentTarget.parentElement.parentElement;
-	editElement = e.currentTarget.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling;
-	editPrice = e.currentTarget.parentElement.previousElementSibling.previousElementSibling.previousElementSibling;
-	editQty = e.currentTarget.parentElement.previousElementSibling.previousElementSibling;
-	editTotal = e.currentTarget.parentElement.previousElementSibling;
-	listInput.value = editElement.innerHTML;
-	priceInput.value = editPrice.innerHTML;
-	qtyInput.value = editQty.innerHTML;
-	editTotal.innerHTML = priceInput.value * qtyInput.value;
+	editElement = e.currentTarget.parentElement.previousElementSibling.previousElementSibling.previousElementSibling;
+	editAuthor = e.currentTarget.parentElement.previousElementSibling.previousElementSibling;
+	editISBN = e.currentTarget.parentElement.previousElementSibling;
+	titleInput.value = editElement.innerHTML;
+	authorInput.value = editAuthor.innerHTML;
+	isbnInput.value = editISBN.innerHTML;
 	editFlag = true;
 	editID = element.dataset.id;
 	submitBtn.textContent = "edit";
 };
 const setBackToDefault = () => {
-	listInput.value = "";
-    priceInput.value = "";
-    qtyInput.value = "";
+	titleInput.value = "";
+    authorInput.value = "";
+    isbnInput.value = "";
 	editFlag = false;
 	editID = "";
 	submitBtn.textContent = "submit";
 };
 
-const addToLocalStorage = (id, value, price, qty, total) => {
-	const listInput = { id, value, price, qty, total };
+const addToLocalStorage = (id, value, author, isbn) => {
+	const titleInput = { id, value, author, isbn };
 	let items = getLocalStorage();
-	items.push(listInput);
+	items.push(titleInput);
 	localStorage.setItem("list", JSON.stringify(items));
 };
 
@@ -158,15 +151,14 @@ const removeFromLocalStorage = (id) => {
 	localStorage.setItem("list", JSON.stringify(items));
 };
 
-const editLocalStorage = (id, value, price, qty, total) => {
+const editLocalStorage = (id, value, author, isbn) => {
 	let items = getLocalStorage();
 
 	items = items.map(function (item) {
 		if (item.id === id) {
 			item.value = value;
-			item.price = price;
-			item.qty = qty;
-			item.total = total;
+			item.author = author;
+			item.isbn = isbn;
 		}
 		return item;
 	});
@@ -178,22 +170,21 @@ const setupItems = () => {
 
 	if (items.length > 0) {
 		items.forEach(function (item) {
-			createListItem(item.id, item.value, item.price, item.qty, item.total);
+			createListItem(item.id, item.value, item.author, item.isbn);
 		});
 		container.classList.add("show-container");
 	}
 };
 
-const createListItem = (id, value, price, qty, total) => {
+const createListItem = (id, value, author, isbn) => {
 	const element = document.createElement("article");
 	let attr = document.createAttribute("data-id");
 	attr.value = id;
 	element.setAttributeNode(attr);
 	element.classList.add("list-item");
 	element.innerHTML = `<p class="title">${value}</p>
-            <p class="price">${price}</p>
-            <p class="qty">${qty}</p>
-            <p class="total">${total}</p>
+            <p class="author">${author}</p>
+            <p class="isbn">${isbn}</p>
             <div class="btn-container">
             <button type="button" class="edit-btn">
                 <i class="fas fa-edit"></i>
@@ -211,12 +202,7 @@ const createListItem = (id, value, price, qty, total) => {
 	list.appendChild(element);
 };
 
-const strike = (e) => {
-    
-} 
 
-
-entry.addEventListener("click", strike)
 form.addEventListener("submit", addItem);
 clearBtn.addEventListener("click", clearItems);
 window.addEventListener("DOMContentLoaded", setupItems);

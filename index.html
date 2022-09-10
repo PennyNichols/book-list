@@ -20,25 +20,22 @@
 				<section class="section">
 					<form class="form">
 						<p class="alert"></p>
-						<h1>Shopping List</h1>
+						<h1>Book List</h1>
 						<div class="form-control">
-							<input type="text" id="list-input" max="15" placeholder="e.g. apples" />
-							<input
-								type="number"
-								id="price-input"
-								step="0.01"
-								placeholder="Price"
-							/>
-							<input type="number" id="qty-input" placeholder="Quantity" />
+							<label for="title-input">Title</label>
+							<input type="text" name="list-input" id="title-input" max="15" />
+							<label for="list-input">Author</label>
+							<input type="text" name="author-input" id="author-input" max="15" />
+							<label for="isbn-input">ISBN #</label>
+							<input type="text" name="isbn-input" id="isbn-input" max="15" />
 							<button type="submit" class="submit-btn">submit</button>
 						</div>
 					</form>
 					<div class="list-container">
                         <div class="list-headers">
-                            <p id="title">Item</p>
-                            <p id="price">Price</p>
-                            <p id="qty">Quantity</p>
-                            <p id="total">Total</p>
+                            <p id="title">Title</p>
+                            <p id="author">Author</p>
+                            <p id="isbn">ISBN</p>
                             <p></p>
                         </div>
 						<div class="list"></div>

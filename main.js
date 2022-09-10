@@ -48,7 +48,7 @@ const addItem = (e) => {
 		editBtn.addEventListener("click", editItem);
 
 		list.appendChild(element);
-		displayAlert("item added", "success");
+		displayAlert("book added", "success");
 		container.classList.add("show-container");
 		addToLocalStorage(id, value, author, isbn);
 		setBackToDefault();
@@ -56,12 +56,12 @@ const addItem = (e) => {
 		editElement.innerHTML = value;
         editAuthor.innerHTML = author;
         editISBN.innerHTML = isbn;
-		displayAlert("item altered", "success");
+		displayAlert("entry altered", "success");
 
 		editLocalStorage(editID, value, author, isbn);
 		setBackToDefault();
 	} else {
-		displayAlert("please input item", "danger");
+		displayAlert("please input information", "danger");
 	}
 };
 const displayAlert = (text, action) => {
@@ -97,7 +97,7 @@ const deleteItem = (e) => {
 	if (list.children.length === 0) {
 		container.classList.remove("show-container");
 	}
-	displayAlert("item removed", "danger");
+	displayAlert("book removed", "danger");
 
 	setBackToDefault();
 	removeFromLocalStorage(id);

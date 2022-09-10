@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap');
+
+
+:root {
+    --mainBG: rgb(241, 240, 242);
+    --formBG: rgba(255, 255, 255, 0.699);
+    --inputBG: rgba(107, 67, 138, 0);
+    --overlayBG: hsla(0, 0%, 100%, 0.622);
+    --submitBG: rgba(245, 209, 167, 0.75);
+    --submitHoverBG: rgba(239, 115, 14, 0.749);
+    --mainFont: 'Poppins', sans-serif;
+    --mainText: black;
+    --redText: rgb(189, 6, 6);
+    --drkRedText: rgb(170, 1, 1);
+    --redHighlight: rgba(171, 51, 51, .3);
+    --greenText: rgb(0, 75, 0);
+    --greenHighlight: rgba(15, 148, 15, .3);
+    --submitHoverText: white; 
+    --editIcon: rgb(32, 181, 32);
+    --deleteIcon: rgb(182, 0, 0);
+    --themeDotBorder: 2px solid black;
+    --boxShadow: 3px 3px 5px 3px rgba(0, 0, 0, 0.24);
+    --boxShadowInset: -2px -2px 13px -2px rgba(0, 0, 0, 0.194) inset;
+    --inputBorder: 1px solid rgba(128, 128, 128, 0.145);
+
+}
+
+*, body {
+  font-family: var(--mainFont);
+  color: var(--mainText);
+  font-size: 16px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#main-container{
+    background-color: var(--mainBG);
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    letter-spacing: .2rem;
+    text-transform: uppercase;
+}
+
+p {
+  margin-bottom: 1.25rem;
+}
+
+#myVideo {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.content-wrapper{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background-color: var(--overlayBG);
+}
+
+.section {
+  background: var(--formBG);
+  border-radius: .5rem;
+  box-shadow: var(--boxShadow);
+  padding: 2rem;
+  max-width: 38rem;
+  margin: 5rem auto;
+  box-shadow: var(--boxShadow);
+}
+
+.alert{
+    text-align: center;
+    width: 100%;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+}
+
+
+ .alert-danger {
+    color: var(--redText);
+    background: var(--redHighlight);
+}
+  .alert-success {
+    color: var(--greenText);
+    background: var(--greenHighlight);
+  }
+
+.form-control{
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+}
+
+input{
+    width: 100%;
+    border: var(--inputBorder);
+    background-color: transparent;
+    padding: .4rem .7rem; 
+    margin: .5rem 0;
+    box-shadow: var(--boxShadowInset);
+}
+
+input:focus{
+    outline: none;
+}
+
+.submit-btn{
+    padding: .4rem .7rem;
+    border: none;
+    border-radius: .4rem;
+    background-color: var(--submitBG);
+    transition: all .7s;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    margin: 1rem;
+}
+
+.submit-btn:hover{
+    background-color: var(--submitHoverBG);
+    color: var(--submitHoverText);
+}
+
+
+.clear-btn{
+    border: none;
+    background-color: transparent;
+    text-transform: uppercase;
+    margin: 2rem auto;
+    margin-bottom: 0;
+    display: flex;
+    color: var(--redText);
+    cursor: pointer;
+    letter-spacing: .2rem;
+}
+
+.list-item{
+    display: grid;
+    grid-template-columns: 4fr 2fr 2fr 2fr 2fr;
+}
+
+.list-headers{
+    display: grid;
+    grid-template-columns: 4fr 2fr 2fr 2fr 2fr;
+}
+
+.price, .total{
+    text-align: right;
+}
+
+.qty{
+    text-align: center;
+    margin-left: 2rem;
+}
+
+#price, #total{
+    text-align: right;
+}
+
+#qty{
+    text-align: center;
+    margin-left: 2rem;
+}
+
+
+#total{
+    text-align: right;
+    margin-right: none;
+}
+
+.edit-btn i{
+    color: var(--editIcon);
+    margin-left: 1rem;
+}
+
+.delete-btn i{
+    color: var(--deleteIcon);
+    margin-left: .5rem;
+}
+
+.edit-btn, .delete-btn{
+    background-color: transparent;
+    border: none;
+}
+
+
+.cross-out{
+    text-decoration: line-through;
+}

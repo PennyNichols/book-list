@@ -3,8 +3,7 @@ const alert = document.querySelector(".alert");
 const titleInput = document.getElementById("title-input");
 const authorInput = document.getElementById("author-input");
 const isbnInput = document.getElementById("isbn-input");
-const entry = document.querySelectorAll(".item")
-
+const entry = document.querySelectorAll(".item");
 
 const submitBtn = document.querySelector(".submit-btn");
 const container = document.querySelector(".list-container");
@@ -18,10 +17,10 @@ let editFlag = false;
 let editID = "";
 
 const addItem = (e) => {
-    e.preventDefault();
+	e.preventDefault();
 	const value = titleInput.value;
-    const author = authorInput.value;
-    const isbn = isbnInput.value;
+	const author = authorInput.value;
+	const isbn = isbnInput.value;
 	const id = new Date().getTime().toString();
 
 	if (value !== "" && !editFlag) {
@@ -54,8 +53,8 @@ const addItem = (e) => {
 		setBackToDefault();
 	} else if (value !== "" && editFlag) {
 		editElement.innerHTML = value;
-        editAuthor.innerHTML = author;
-        editISBN.innerHTML = isbn;
+		editAuthor.innerHTML = author;
+		editISBN.innerHTML = isbn;
 		displayAlert("entry altered", "success");
 
 		editLocalStorage(editID, value, author, isbn);
@@ -87,7 +86,6 @@ const clearItems = () => {
 	localStorage.removeItem("list");
 };
 
-
 const deleteItem = (e) => {
 	const element = e.currentTarget.parentElement.parentElement;
 	const id = element.dataset.id;
@@ -103,12 +101,13 @@ const deleteItem = (e) => {
 	removeFromLocalStorage(id);
 };
 
-
-
 const editItem = (e) => {
 	const element = e.currentTarget.parentElement.parentElement;
-	editElement = e.currentTarget.parentElement.previousElementSibling.previousElementSibling.previousElementSibling;
-	editAuthor = e.currentTarget.parentElement.previousElementSibling.previousElementSibling;
+	editElement =
+		e.currentTarget.parentElement.previousElementSibling.previousElementSibling
+			.previousElementSibling;
+	editAuthor =
+		e.currentTarget.parentElement.previousElementSibling.previousElementSibling;
 	editISBN = e.currentTarget.parentElement.previousElementSibling;
 	titleInput.value = editElement.innerHTML;
 	authorInput.value = editAuthor.innerHTML;
@@ -119,8 +118,8 @@ const editItem = (e) => {
 };
 const setBackToDefault = () => {
 	titleInput.value = "";
-    authorInput.value = "";
-    isbnInput.value = "";
+	authorInput.value = "";
+	isbnInput.value = "";
 	editFlag = false;
 	editID = "";
 	submitBtn.textContent = "submit";
@@ -201,7 +200,6 @@ const createListItem = (id, value, author, isbn) => {
 
 	list.appendChild(element);
 };
-
 
 form.addEventListener("submit", addItem);
 clearBtn.addEventListener("click", clearItems);
